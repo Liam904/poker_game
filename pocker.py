@@ -93,9 +93,10 @@ def playermoves(player_hand, computer_hand, tablecard, deck):
             playermoves(player_hand, computer_hand, tablecard, deck)
 
     elif play[0] == "Joker" or play[1] == "Joker":
-            for _ in range(5):
-                if deck:
-                    computer_hand.append(deck.pop())
+        for _ in range(5):
+            if deck:
+                computer_hand.append(deck.pop())
+
 
     elif rank == "Pick":
         player_hand.append(deck.pop())
@@ -105,13 +106,17 @@ def playermoves(player_hand, computer_hand, tablecard, deck):
         print(f"Card {play} is not playable. Please try again.")
         playermoves(player_hand, computer_hand, tablecard, deck)
 
+    
 
 def computer_turn(player_hand, computer_hand, tablecard, deck):
 
     playable_cards = [
         card
         for card in computer_hand
-        if card[0] == tablecard[-1][0] or card[1] == tablecard[-1][1] or card[0] == "joker" or card[1] == "joker"        
+        if card[0] == tablecard[-1][0]
+        or card[1] == tablecard[-1][1]
+        or card[0] == "joker"
+        or card[1] == "joker"
     ]
     if playable_cards:
         play = random.choice(playable_cards)
@@ -139,17 +144,21 @@ def computer_turn(player_hand, computer_hand, tablecard, deck):
             print("Penalty!")
             print("Cards added")
 
-    if play[0] == "k" or play[0] == "J":
+    if play[0] == "K" or play[0] == "J":
         computer_turn(player_hand, computer_hand, tablecard, deck)
         playermoves(player_hand, computer_hand, tablecard, deck)
 
     if play[0] == "8" or play[0] == "Q":
         computer_turn(player_hand, computer_hand, tablecard, deck)
 
-    if play[0] == "joker" or play[1] == "joker":
+    elif play[0] == "joker" or play[1] == "joker":
         for _ in range(5):
             if deck:
                 player_hand.append(deck.pop())
+        tablecard[-1].remove()
+
+
+    
 
     print(f"Computer's hand: {computer_hand}")
     print(f"table Cards: {tablecard}")
