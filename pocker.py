@@ -7,7 +7,7 @@ suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 new_ranks = ["4", "5", "6", "7", "8", "9", "10"]
 new_suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 
-joker = [("joker", "joker")]
+joker = ("joker", "joker")
 
 
 # Function to create and shuffle a deck of cards
@@ -111,8 +111,7 @@ def computer_turn(player_hand, computer_hand, tablecard, deck):
     playable_cards = [
         card
         for card in computer_hand
-        if card[0] == tablecard[-1][0] or card[1] == tablecard[-1][1]
-        
+        if card[0] == tablecard[-1][0] or card[1] == tablecard[-1][1] or card[0] == "joker" or card[1] == "joker"        
     ]
     if playable_cards:
         play = random.choice(playable_cards)
@@ -147,7 +146,7 @@ def computer_turn(player_hand, computer_hand, tablecard, deck):
     if play[0] == "8" or play[0] == "Q":
         computer_turn(player_hand, computer_hand, tablecard, deck)
 
-    if play[0] == "Joker" or play[1] == "Joker":
+    if play[0] == "joker" or play[1] == "joker":
         for _ in range(5):
             if deck:
                 player_hand.append(deck.pop())
